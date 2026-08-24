@@ -97,6 +97,10 @@ body {
    SECTION 2: MAIN PAGE
    ================================================== */
 
+/* ==================================================
+   MAIN PAGE — CENTERED ON THE SCREEN
+   ================================================== */
+
 .page {
 
     width: 100%;
@@ -104,43 +108,48 @@ body {
     max-width: 600px;
 
     /*
-       Keep the main content inside the safe area.
-
-       The background itself still extends behind
-       the safe areas because it belongs to body.
+       Fill the entire physical viewport.
     */
 
     height: 100vh;
 
-    padding-top:
-        calc(
-            35px +
-            env(safe-area-inset-top)
-        );
-
-    padding-right:
-        25px;
-
-    padding-bottom:
-        calc(
-            25px +
-            env(safe-area-inset-bottom)
-        );
-
-    padding-left:
-        25px;
-
-    text-align: center;
+    /*
+       Center everything vertically.
+    */
 
     display: flex;
 
     flex-direction: column;
 
+    justify-content: center;
+
     align-items: center;
 
+    text-align: center;
+
     /*
-       Prevent content from creating an additional
-       page height.
+       Horizontal spacing.
+    */
+
+    padding-left: 25px;
+
+    padding-right: 25px;
+
+    /*
+       DO NOT add the iPhone top/bottom safe-area
+       padding here.
+
+       The background needs to extend into those
+       areas, while the content itself is centered
+       independently.
+    */
+
+    padding-top: 0;
+
+    padding-bottom: 0;
+
+    /*
+       Prevent accidental scrolling.
     */
 
     overflow: hidden;
@@ -316,6 +325,10 @@ body {
    SECTION 7: SQUISHY AREA
    ================================================== */
 
+/* ==================================================
+   SQUISHY AREA
+   ================================================== */
+
 .squishy-area {
 
     width: 100%;
@@ -329,6 +342,12 @@ body {
     align-items: center;
 
     position: relative;
+
+    /*
+       Keeps the squishy visually centered.
+    */
+
+    flex-shrink: 0;
 
 }
 
@@ -603,19 +622,49 @@ body {
 
     .page {
 
-        padding-top:
-            calc(
-                20px +
-                env(safe-area-inset-top)
-            );
+        /*
+           Still center the UI, but make the overall
+           arrangement slightly more compact.
+        */
 
-        padding-bottom:
-            calc(
-                20px +
-                env(safe-area-inset-bottom)
-            );
+        padding-left: 20px;
+
+        padding-right: 20px;
 
     }
+
+
+    .squishy-area {
+
+        height: 285px;
+
+    }
+
+
+    .squishy {
+
+        width: 165px;
+
+        height: 165px;
+
+    }
+
+
+    .squishy-area::before {
+
+        width: 210px;
+
+        height: 210px;
+
+    }
+
+
+    .heart-button {
+
+        margin-top: 7px;
+
+    }
+
 }
 
 
