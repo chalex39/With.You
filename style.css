@@ -6,7 +6,6 @@
     box-sizing: border-box;
 }
 
-
 html {
 
     margin: 0;
@@ -15,12 +14,16 @@ html {
 
     width: 100%;
 
-    min-height: 100%;
-
     /*
-       Makes the webpage extend into the iPhone's
-       safe-area regions.
+       Use the physical viewport height here.
+
+       This is more reliable for the iPhone Home
+       Screen version than 100dvh in this setup.
     */
+
+    height: 100vh;
+
+    overflow: hidden;
 
     background:
         var(--background-color);
@@ -36,50 +39,111 @@ body {
 
     width: 100%;
 
-    min-height: 100vh;
-
-    min-height: 100dvh;
-
     /*
        IMPORTANT:
+       Use 100vh rather than 100dvh.
 
-       The body itself now reaches behind the
-       iPhone status bar.
+       This prevents the bottom of the page from
+       being shortened by the iPhone safe area.
+    */
 
-       Because the background color is controlled
-       by our CSS variable, the status-bar area
-       will visually follow the color changes.
+    height: 100vh;
+
+    overflow: hidden;
+
+    /*
+       The background extends all the way to the
+       physical edges of the iPhone screen.
     */
 
     background:
         var(--background-color);
 
-    overflow: hidden;
+    color:
+        var(--text-color);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    touch-action: none;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    /*
+       IMPORTANT:
+
+       Do NOT put safe-area padding directly on
+       body.
+
+       That was contributing to the bottom
+       sizing problem.
+    */
+
+    transition:
+        background 0.9s ease;
 
 }
 
+
 /* ==================================================
-   SECTION 2: COLOR VARIABLES
+   SECTION 2: MAIN PAGE
    ================================================== */
 
-:root {
+.page {
 
-    --background-color: #fff1f5;
+    width: 100%;
 
-    --background-glow: #ffe3eb;
+    max-width: 600px;
 
-    --squishy-light: #fff8fa;
+    /*
+       Keep the main content inside the safe area.
 
-    --squishy-main: #f5c6d5;
+       The background itself still extends behind
+       the safe areas because it belongs to body.
+    */
 
-    --squishy-dark: #e5a6b9;
+    height: 100vh;
 
-    --squishy-glow:
-        rgba(245, 198, 213, 0.30);
+    padding-top:
+        calc(
+            35px +
+            env(safe-area-inset-top)
+        );
 
-    --text-color: #4a403d;
+    padding-right:
+        25px;
 
-    --secondary-text: #a99b96;
+    padding-bottom:
+        calc(
+            25px +
+            env(safe-area-inset-bottom)
+        );
+
+    padding-left:
+        25px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    /*
+       Prevent content from creating an additional
+       page height.
+    */
+
+    overflow: hidden;
 
 }
 
@@ -535,19 +599,23 @@ body {
    SECTION 15: HEART HOVER
    ================================================== */
 
-@media (hover: hover) {
+@media (max-height: 700px) {
 
-    .heart-button:hover
-    .heart-shape {
+    .page {
 
-        transform:
-            scale(1.08);
+        padding-top:
+            calc(
+                20px +
+                env(safe-area-inset-top)
+            );
 
-        filter:
-            brightness(1.04);
+        padding-bottom:
+            calc(
+                20px +
+                env(safe-area-inset-bottom)
+            );
 
     }
-
 }
 
 
