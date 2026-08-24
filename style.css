@@ -6,17 +6,57 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+
+html {
+
     margin: 0;
+
     padding: 0;
 
     width: 100%;
+
     min-height: 100%;
 
-    overflow: hidden;
+    /*
+       Makes the webpage extend into the iPhone's
+       safe-area regions.
+    */
+
+    background:
+        var(--background-color);
+
 }
 
+
+body {
+
+    margin: 0;
+
+    padding: 0;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    min-height: 100dvh;
+
+    /*
+       IMPORTANT:
+
+       The body itself now reaches behind the
+       iPhone status bar.
+
+       Because the background color is controlled
+       by our CSS variable, the status-bar area
+       will visually follow the color changes.
+    */
+
+    background:
+        var(--background-color);
+
+    overflow: hidden;
+
+}
 
 /* ==================================================
    SECTION 2: COLOR VARIABLES
@@ -85,11 +125,39 @@ body {
 
     -webkit-user-select: none;
 
-    padding-top: env(safe-area-inset-top);
-    padding-right: env(safe-area-inset-right);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
+    .page {
 
+    width: 100%;
+
+    max-width: 600px;
+
+    padding-top:
+        calc(
+            35px +
+            env(safe-area-inset-top)
+        );
+
+    padding-right:
+        25px;
+
+    padding-bottom:
+        calc(
+            35px +
+            env(safe-area-inset-bottom)
+        );
+
+    padding-left:
+        25px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
     /*
        Faster than before, but still deliberately
        smooth rather than instant.
