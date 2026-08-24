@@ -142,7 +142,7 @@ body {
 
     padding-bottom:
         calc(
-            50px +
+            200px +
             env(safe-area-inset-bottom)
         );
 
